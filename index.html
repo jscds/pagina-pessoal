@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Julio Cesar — Página Pessoal</title>
+  <style>
+    :root{
+      --accent: #7c4dff;
+      --bg-color: #0b1020;
+      --card-bg: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --text: #e6eef8;
+      --muted: #9fb0d3;
+      --max-width: 950px;
+      --bg-image: none; /* será atualizado pelo JS quando o usuário adicionar imagem */
+    }
+
+    /* Reset simples */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg, rgba(10,12,20,1) 0%, rgba(6,8,15,1) 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:32px;
+      display:flex;justify-content:center;align-items:flex-start;
+    }
+
+    .wrap{
+      width:100%;max-width:var(--max-width);
+      backdrop-filter: blur(6px);
+      border-radius:16px;
+      box-shadow: 0 10px 30px rgba(2,4,10,0.7);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:24px;
+      position:relative;
+    }
+
+    /* fundo personalizável */
+    .cover{
+      position:absolute;inset:0;
+      background-image:var(--bg-image), linear-gradient(180deg, rgba(7,9,16,0.6), rgba(7,9,16,0.9));
+      background-size:cover;background-position:center;
+      z-index:0;filter:contrast(1.02) saturate(1.05);
+    }
+
+    main{
+      position:relative;z-index:1;padding:32px;
+    }
+
+    .sidebar{
+      position:relative;z-index:1;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-left:1px solid rgba(255,255,255,0.03);
+    }
+
+    h1{font-size:28px;margin-bottom:6px}
+    h2{font-size:18px;margin:18px 0 8px;color:var(--muted)}
+    p{color:var(--text);margin:8px 0}
+
+    .me-meta{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+    .avatar{
+      width:84px;height:84px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#5ad1ff);
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;color:#07101f;flex-shrink:0;overflow:hidden;position:relative
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+
+    .card{background:var(--card-bg);padding:18px;border-radius:12px;margin-top:14px;border:1px solid rgba(255,255,255,0.02)}
+
+    .list{display:grid;gap:10px}
+
+    /* botões */
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#3db6ff);color:#07101f;font-weight:600;text-decoration:none;border:none;cursor:pointer}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+
+    /* detalhes responsivos */
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr;}
+      .sidebar{order:2}
+    }
+
+    /* pequenos elementos interativos */
+    .controls{display:flex;gap:8px;margin-top:12px}
+    .muted{color:var(--muted);font-size:14px}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    /* estilo do input file invisível */
+    .file-input{display:none}
+    .uploader{display:flex;gap:8px;align-items:center}
+
+    /* animação sutil */
+    .title-emoji{display:inline-block;margin-left:8px;transform:translateY(2px)}
+
+  </style>
+</head>
+<body>
+  <div class="wrap" id="pageWrap">
+    <div class="cover" id="pageCover" aria-hidden="true"></div>
+
+    <main>
+      <div class="me-meta">
+        <div class="avatar" id="avatar">
+          <!-- placeholder: troque pela sua imagem arrastando para o upload -->
+          <span id="avatarInitial">JC</span>
+        </div>
+        <div>
+          <h1>Oi — eu sou Julio Cesar <span class="title-emoji">👋</span></h1>
+          <div class="muted">Tenho <strong id="idade">16</strong> anos · otaku · leitor de mangás</div>
+          <div class="chips">
+            <div class="chip">Animes</div>
+            <div class="chip">Jogos</div>
+            <div class="chip">Mangás</div>
+            <div class="chip">Design simples</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="card">
+        <h2>Sobre mim</h2>
+        <p>Eu sou Julio, tenho 16 anos e sou otaku — adoro animes e jogos de videogame. Passo horas lendo mangás, assistindo séries e jogando com amigos. Gosto de design clean, layouts modernos e coisas que deixam um site com cara de 'eu'.</p>
+        <p>Sou curioso, gosto de aprender a mexer com HTML, CSS e JavaScript — inclusive esta página usa os três. Se quiser, pode editar os textos ou trocar as cores mais tarde.</p>
+      </section>
+
+      <section class="card">
+        <h2>Meus gostos</h2>
+        <div class="list">
+          <p><strong>Animes favoritos:</strong> (adicione os seus abaixo)</p>
+          <p><strong>Jogos que curto:</strong> RPGs, plataformas e jogos de luta — principalmente jogar com amigos online.</p>
+          <p><strong>O que leio:</strong> Mangás variados — shonen, seinen e alguns slice of life.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Recursos interativos</h2>
+        <p class="muted">Aqui tem algumas coisas em JavaScript para você testar.</p>
+        <div class="controls">
+          <button class="btn" id="toggleTheme">Alternar tema</button>
+          <button class="btn ghost" id="randomText">Mostrar frase aleatória</button>
+        </div>
+        <div id="randomBox" class="card" style="margin-top:12px;display:none"></div>
+      </section>
+
+      <footer>
+        Página pessoal criada por você — sinta-se livre para copiar, editar e personalizar. Para trocar a foto de fundo clique em "Adicionar Foto de Fundo" na lateral direita.
+      </footer>
+    </main>
+
+    <aside class="sidebar">
+      <h2>Personalizar</h2>
+
+      <div class="card">
+        <label class="muted">Imagem de fundo</label>
+        <div class="uploader" style="margin-top:8px">
+          <label class="btn" for="bgInput">Adicionar Foto de Fundo</label>
+          <input id="bgInput" class="file-input" type="file" accept="image/*">
+          <button class="btn ghost" id="resetBg">Remover</button>
+        </div>
+        <p class="muted" style="margin-top:8px">Dica: escolha uma imagem grande (1920×1080) para ficar bonita como fundo.</p>
+      </div>
+
+      <div class="card">
+        <label class="muted">Avatar (foto quadrada)</label>
+        <div class="uploader" style="margin-top:8px">
+          <label class="btn" for="avatarInput">Enviar Avatar</label>
+          <input id="avatarInput" class="file-input" type="file" accept="image/*">
+          <button class="btn ghost" id="resetAvatar">Remover</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="muted">Editar nome/idade</label>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+          <input id="nameInput" placeholder="Seu nome" value="Julio Cesar" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)">
+          <input id="ageInput" placeholder="Idade" value="16" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)">
+          <button class="btn" id="saveMeta">Salvar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="muted">Outras opções</label>
+        <div style="margin-top:8px;display:flex;gap:8px;flex-direction:column">
+          <button class="btn ghost" id="downloadHtml">Baixar HTML</button>
+          <button class="btn ghost" id="resetAll">Restaurar padrões</button>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+      <div class="muted">Versão: 1.0 · Editável</div>
+    </aside>
+
+  </div>
+
+  <script>
+    // Elementos
+    const pageWrap = document.getElementById('pageWrap');
+    const pageCover = document.getElementById('pageCover');
+    const bgInput = document.getElementById('bgInput');
+    const resetBg = document.getElementById('resetBg');
+    const avatarInput = document.getElementById('avatarInput');
+    const avatar = document.getElementById('avatar');
+    const avatarInitial = document.getElementById('avatarInitial');
+    const resetAvatar = document.getElementById('resetAvatar');
+    const nameInput = document.getElementById('nameInput');
+    const ageInput = document.getElementById('ageInput');
+    const saveMeta = document.getElementById('saveMeta');
+    const idadeEl = document.getElementById('idade');
+    const randomBtn = document.getElementById('randomText');
+    const randomBox = document.getElementById('randomBox');
+    const toggleTheme = document.getElementById('toggleTheme');
+    const downloadHtml = document.getElementById('downloadHtml');
+    const resetAll = document.getElementById('resetAll');
+
+    // Frases aleatórias para mostrar
+    const frases = [
+      'Mais mangás, menos stress.',
+      'Hora de uma maratona de animes!',
+      'Partiu jogar com os amigos.',
+      'Novo capítulo hoje? Preciso ler.'
+    ];
+
+    // Função para aplicar imagem de fundo via URL de objeto
+    function applyBackground(url){
+      document.documentElement.style.setProperty('--bg-image', url ? `url(${url})` : 'none');
+    }
+
+    // Upload de fundo
+    bgInput.addEventListener('change', e=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const url = URL.createObjectURL(file);
+      applyBackground(url);
+      // guarda no localStorage para persistir entre atualizações de página
+      localStorage.setItem('bgData', url);
+    });
+
+    resetBg.addEventListener('click', ()=>{
+      applyBackground(null);
+      localStorage.removeItem('bgData');
+    });
+
+    // Avatar upload
+    avatarInput.addEventListener('change', e=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const url = URL.createObjectURL(file);
+      avatar.innerHTML = '';
+      const img = document.createElement('img'); img.src = url; img.alt = 'Avatar';
+      avatar.appendChild(img);
+      localStorage.setItem('avatarData', url);
+    });
+
+    resetAvatar.addEventListener('click', ()=>{
+      avatar.innerHTML = '<span id="avatarInitial">JC</span>';
+      localStorage.removeItem('avatarData');
+    });
+
+    // salvar nome/idade
+    saveMeta.addEventListener('click', ()=>{
+      const name = nameInput.value.trim() || 'Julio Cesar';
+      const age = parseInt(ageInput.value,10) || 16;
+      document.querySelector('h1').innerHTML = `Oi — eu sou ${escapeHtml(name)} <span class="title-emoji">👋</span>`;
+      idadeEl.textContent = age;
+      localStorage.setItem('name', name);
+      localStorage.setItem('age', age);
+      alert('Dados salvos localmente no navegador.');
+    });
+
+    // mostrar frase aleatória
+    randomBtn.addEventListener('click', ()=>{
+      const f = frases[Math.floor(Math.random()*frases.length)];
+      randomBox.style.display = 'block';
+      randomBox.textContent = f;
+    });
+
+    // alternar tema (simples alteração de cores)
+    let dark = true;
+    toggleTheme.addEventListener('click', ()=>{
+      if(dark){
+        document.documentElement.style.setProperty('--bg-color','#f7f9ff');
+        document.documentElement.style.setProperty('--text','#061226');
+        document.documentElement.style.setProperty('--card-bg','rgba(5,10,25,0.03)');
+        dark = false;
+      } else {
+        document.documentElement.style.removeProperty('--bg-color');
+        document.documentElement.style.removeProperty('--text');
+        document.documentElement.style.removeProperty('--card-bg');
+        dark = true;
+      }
+    });
+
+    // baixar HTML (gera um arquivo com o HTML atual — observa que imagens via objectURL não serão embutidas)
+    downloadHtml.addEventListener('click', ()=>{
+      const html = `<!doctype html>\n<html lang="pt-BR">\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>${escapeHtml(nameInput.value||'Julio Cesar')}</title></head><body>` + document.documentElement.querySelector('body').innerHTML + `</body></html>`;
+      const blob = new Blob([html],{type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'pagina_julio.html'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // restaurar padrões
+    resetAll.addEventListener('click', ()=>{
+      if(confirm('Tem certeza que quer restaurar tudo para o padrão?')){
+        localStorage.clear();
+        location.reload();
+      }
+    });
+
+    // escape simples para evitar injeção de HTML nas strings inseridas
+    function escapeHtml(str){
+      return String(str).replace(/[&<>\"']/g, function(s){
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":"&#39;"})[s];
+      });
+    }
+
+    // carrega estado salvo (se houver)
+    window.addEventListener('load', ()=>{
+      try{
+        const bg = localStorage.getItem('bgData');
+        if(bg) applyBackground(bg);
+        const av = localStorage.getItem('avatarData');
+        if(av){ avatar.innerHTML = ''; const img = document.createElement('img'); img.src = av; img.alt = 'Avatar'; avatar.appendChild(img); }
+        const name = localStorage.getItem('name');
+        if(name){ document.querySelector('h1').innerHTML = `Oi — eu sou ${escapeHtml(name)} <span class="title-emoji">👋</span>`; nameInput.value = name }
+        const age = localStorage.getItem('age');
+        if(age){ idadeEl.textContent = age; ageInput.value = age }
+      }catch(e){ console.warn('Erro ao carregar dados salvos',e) }
+    });
+
+  </script>
+</body>
+</html>
